@@ -13,7 +13,18 @@ struct StaticModule{Name, names, T <: Tuple}
 end
 Base.propertynames(::StaticModule{Name, names}) where {Name, names} = names
 Base.getproperty(sm::StaticModule, s::Symbol) = getproperty(getfield(sm, :nt), s)
-Base.show(io::IO, ::StaticModule{Name}) where {Name} = print(io, "StaticModule $Name")
+function Base.show(io::IO, sm::StaticModule{Name}) where {Name}
+    nt = getfield(sm, :nt)    
+    n = maximum(s -> length(String(s)), keys(nt))
+    print(io, "StaticModule $Name")
+    if !get(io, :compact, false)
+        print(io, " with names")
+        foreach(keys(nt)) do k
+            pad = mapreduce(_ -> " ", *, 1:(n - length(String(k))), init="")
+            print(io, "\n  $k$pad = $(repr(nt[k]))")
+        end
+    end
+end
 
 function get_let_locals(ex::Expr)
     vars = (solve_from_local! ∘ simplify_ex)(ex).args[1].bounds
