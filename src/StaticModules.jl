@@ -67,6 +67,7 @@ end
 get_outers(ex) = (unique! ∘ _get_outers ∘ solve_from_local! ∘ simplify_ex)(ex)
 
 macro with(sm, blck::Expr)
+    blck = macroexpand(__module__, blck)
     outers = get_outers(blck)
     defs = map(outers) do s
         :($s = ($(QuoteNode(s)) ∈ $propertynames($sm)) ? $sm.$s : $s)

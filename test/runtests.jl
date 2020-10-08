@@ -55,3 +55,11 @@ end
 
 @test Foo.x == 1
 @test Foo.y == 2
+
+macro bar()
+    esc(:(y))
+end
+
+@test @with Foo begin
+     @bar() == 2
+end
