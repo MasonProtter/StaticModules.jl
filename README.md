@@ -12,7 +12,7 @@ julia> @staticmodule Foo begin
            x = 1
            f(y) = x^2 + 2y
        end
-StaticModule Foo with names
+StaticModule Foo containing
   f = var"#f#6"{Int64}(1)
   x = 1
 
