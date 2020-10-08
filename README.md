@@ -14,10 +14,8 @@ julia> @staticmodule Foo begin
        end
 StaticModule Foo
 
-
 julia> propertynames(Foo)
 (:f, :x)
-
 
 julia> x
 ERROR: UndefVarError: x not defined
