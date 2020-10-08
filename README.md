@@ -59,7 +59,8 @@ julia> @const_staticmodule X begin
                X = 1
            end
        end
-StaticModule X
+StaticModule X containing
+  X = StaticModule X
 
 julia> @btime @with X begin
            @with X begin

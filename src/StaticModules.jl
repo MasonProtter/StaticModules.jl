@@ -21,7 +21,7 @@ function Base.show(io::IO, sm::StaticModule{Name}) where {Name}
         print(io, " containing")
         foreach(keys(nt)) do k
             pad = mapreduce(_ -> " ", *, 1:(n - length(String(k))), init="")
-            print(io, "\n  $k$pad = $(repr(nt[k]))")
+            print(io, "\n  $k$pad = $(repr(nt[k]; context=:compact => true))")
         end
     end
 end
