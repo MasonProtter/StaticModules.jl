@@ -14,11 +14,11 @@ end
 Base.propertynames(::StaticModule{Name, names}) where {Name, names} = names
 Base.getproperty(sm::StaticModule, s::Symbol) = getproperty(getfield(sm, :nt), s)
 function Base.show(io::IO, sm::StaticModule{Name}) where {Name}
-    nt = getfield(sm, :nt)    
+    nt = getfield(sm, :nt)
     n = maximum(s -> length(String(s)), keys(nt))
     print(io, "StaticModule $Name")
     if !get(io, :compact, false)
-        print(io, " with names")
+        print(io, " containing")
         foreach(keys(nt)) do k
             pad = mapreduce(_ -> " ", *, 1:(n - length(String(k))), init="")
             print(io, "\n  $k$pad = $(repr(nt[k]))")
