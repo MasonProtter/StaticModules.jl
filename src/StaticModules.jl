@@ -15,7 +15,7 @@ Base.propertynames(::StaticModule{Name, names}) where {Name, names} = names
 Base.getproperty(sm::StaticModule, s::Symbol) = getproperty(getfield(sm, :nt), s)
 function Base.show(io::IO, sm::StaticModule{Name}) where {Name}
     nt = getfield(sm, :nt)
-    n = maximum(s -> length(String(s)), keys(nt))
+    n = !isempty(nt) ? maximum(s -> length(String(s)), keys(nt)) : 0
     print(io, "StaticModule $Name")
     if !get(io, :compact, false)
         print(io, " containing")
@@ -32,6 +32,7 @@ function get_let_locals(ex::Expr)
 end
 
 macro staticmodule(name, blck::Expr)
+    blck = macroexpand(__module__, blck)
     @assert blck.head == :block
     locals = map(get_let_locals(blck)) do s
         :($s = $s)

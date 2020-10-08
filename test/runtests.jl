@@ -40,3 +40,18 @@ end
         X^2 + 1 == 2
     end
 end
+
+
+macro foo()
+    quote
+        x = 1
+        y = 2
+    end |> esc
+end
+
+@staticmodule Foo begin
+    @foo
+end
+
+@test Foo.x == 1
+@test Foo.y == 2
