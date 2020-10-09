@@ -72,7 +72,7 @@ julia> @btime @with X begin
   0.030 ns (0 allocations: 0 bytes)
 ```
 If you supply a `Tuple` of objects supporting `getproperty`, then `@with` will use names from all of them, with priority being taken by earlier objects in the list if names collide:
-```
+```julia
 julia> @with ((;a=1, b="hi"), (;b=2, c=3)) begin
            a, b, c
        end
@@ -83,7 +83,7 @@ Using two many objects in `@with` may stress the compiler.
 
 ### Replacements for `using`
 Sometimes you might want to `using` a module into a `StaticModule`, but this will not work the way it works in standard modules. You can 'fake' this behaviour using the `@unpack` macro from [Parameters.jl](https://github.com/mauro3/Parameters.jl) and `import`ing packages into the parent module:
-```
+```julia
 julia> using Parameters
 
 julia> import StaticArrays
