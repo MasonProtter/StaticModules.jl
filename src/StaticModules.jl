@@ -66,10 +66,15 @@ end
 
 get_outers(ex) = (unique! ∘ _get_outers ∘ solve_from_local! ∘ simplify_ex)(ex)
 
+
+function is_named_tuple(ex::Expr)
+    (ex.head == :tuple) && ex.args[1] isa Expr && ((ex.args[1].head == :(=)) || ex.args[1].head == :parameters)
+end
+
 macro with(sm, blck::Expr)
     blck = macroexpand(__module__, blck)
     outers = get_outers(blck)
-    if sm isa Expr && sm.head == :tuple
+    if sm isa Expr && sm.head == :tuple && !is_named_tuple(sm)
         sms = sm.args
     else
         sms = [sm]
