@@ -69,8 +69,16 @@ get_outers(ex) = (unique! ∘ _get_outers ∘ solve_from_local! ∘ simplify_ex)
 macro with(sm, blck::Expr)
     blck = macroexpand(__module__, blck)
     outers = get_outers(blck)
+    if sm isa Expr && sm.head == :tuple
+        sms = sm.args
+    else
+        sms = [sm]
+    end
     defs = map(outers) do s
-        :($s = ($(QuoteNode(s)) ∈ $propertynames($sm)) ? $sm.$s : $s)
+        switch = foldr(sms, init=s) do M, ex
+            :(($(QuoteNode(s)) ∈ $propertynames($M)) ? $M.$s : $ex)
+        end
+        :($s = $switch)
     end
     quote
         let $(defs...)
