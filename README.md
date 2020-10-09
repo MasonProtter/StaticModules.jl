@@ -25,7 +25,7 @@ ERROR: UndefVarError: x not defined
 julia> Foo.x
 1
 ```
-StaticModules.jl also exports a macro `@const_staticmodule` for use in the global scope so that the name of the module is bound as a `cons` rather than a regular variable. 
+StaticModules.jl also exports a macro `@const_staticmodule` for use in the global scope so that the name of the module is bound as a `const` rather than a regular variable. 
 
 ### Running code in a StaticModule
 We can run expressions 'inside' a `StaticModule`'s namespace with the `@with` macro
