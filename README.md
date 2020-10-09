@@ -93,9 +93,8 @@ julia> @staticmodule Foo begin
            a = SVector((1,2,3))' * SA[4,5,6]
        end
 StaticModule Foo containing
-  a       = 32
+        a = 32
   SVector = SArray{Tuple{S},T,1,S} where T where S
-  SA      = SA
-  ##253   = StaticArrays
-
+       SA = SA
+    ##272 = StaticArrays
 ```
