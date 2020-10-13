@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.com/MasonProtter/StaticModules.jl.svg?branch=master)](https://travis-ci.com/MasonProtter/StaticModules.jl)
 
-a StaticModule is basically a little namespace you can use for
+StaticModules.jl is available on the general registry, to install it do `using Pkg; pkg"add StaticModules"` or equivalent. 
+
+a `StaticModule` is basically a little, statically sized and typed namespace you can use for
 enclosing julia code and variables without runtime overhead and
 useable in either the global or local scopes. `StaticModule`s are
 *not* a replacement `module`s, but may be complementary.
