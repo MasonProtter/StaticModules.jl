@@ -1,6 +1,6 @@
 # StaticModules.jl
 
-[![Build Status](https://travis-ci.com/MasonProtter/StaticModules.jl.svg?branch=master)](https://travis-ci.com/MasonProtter/StaticModules.jl)
+[![CI](https://github.com/MasonProtter/StaticModules.jl/actions/workflows/ci.yml/badge.svg)](https://github.com/MasonProtter/StaticModules.jl/actions/workflows/ci.yml)
 
 StaticModules.jl is available on the general registry, to install it do `using Pkg; pkg"add StaticModules"` or equivalent. 
 
